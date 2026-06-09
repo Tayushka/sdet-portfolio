@@ -32,6 +32,6 @@ errorUser: {
 visualUser: {
     username: "visual_user",
     password: "secret_sauce"
-}
+},
 
 };
