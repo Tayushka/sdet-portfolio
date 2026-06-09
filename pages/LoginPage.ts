@@ -22,12 +22,21 @@ export class LoginPage {
         await this.page.goto("/");
     }
 
-    async logIn(username : string, password: string) {
+    private async fillCredentials(username : string, password: string) {
         await this.usernameInput.fill(username);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
-        return new DashboardPage(this.page);
     }
+
+    async logIn(username: string, password: string) {
+        await this.fillCredentials(username, password);
+        return new DashboardPage(this.page);
+    };
+
+    async logInFailed(username : string, password : string) {
+        await this.fillCredentials(username, password);
+        return this;
+    };
 
 
 };
