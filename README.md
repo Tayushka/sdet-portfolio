@@ -13,8 +13,11 @@ a practice e-commerce platform built for automation testing.
 - `fixtures/` — Test data and interfaces
 
 > As the project is small, interfaces and test data are kept together 
-> in `fixtures/users.ts`. In a larger project these would be separated 
-> into dedicated `types` and `helpers` folders.
+> in `fixtures/`. In a larger project these would be separated into 
+> dedicated `types` and `helpers` folders.
+>
+> `users.ts` contains real app accounts. `credentials.ts` contains 
+> invalid input combinations used for negative testing.
 
 ## How to Run
 
@@ -38,8 +41,12 @@ npx playwright test --headed
 ### Login Page
 - Successful login with valid credentials
 - Login with locked out user
+- Login with incorrect username
+- Login with incorrect password
+- Login with empty username
+- Login with empty password
+- Login with empty fields
 
 ## What's Next
-- Login with invalid credentials
 - Dashboard page tests
 - Cart and checkout flows
