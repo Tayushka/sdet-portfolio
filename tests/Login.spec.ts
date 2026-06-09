@@ -14,7 +14,7 @@ test.describe("Login Page", () => {
         loginPage = new LoginPage(page);
         await loginPage.visit();
 
-    })
+    });
 
     test("Log In with correct credentials", async () => {
 
