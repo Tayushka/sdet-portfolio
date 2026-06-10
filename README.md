@@ -1,6 +1,6 @@
 # Saucedemo UI Test Suite
 
-End-to-end test suite for [saucedemo.com](https://www.saucedemo.com) — 
+End-to-end test suite for [saucedemo.com](https://www.saucedemo.com) -  
 a practice e-commerce platform built for automation testing.
 
 ## Tech Stack
@@ -18,6 +18,9 @@ a practice e-commerce platform built for automation testing.
 >
 > `users.ts` contains real app accounts. `credentials.ts` contains 
 > invalid input combinations used for negative testing.
+> 
+> In order to showcase test data files, user credentials are made public.
+> Obviously, on a real project the solution is different.
 
 ## How to Run
 
@@ -50,3 +53,4 @@ npx playwright test --headed
 ## What's Next
 - Dashboard page tests
 - Cart and checkout flows
+- Refactoring: creation of BasePage
