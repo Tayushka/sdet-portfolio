@@ -50,7 +50,16 @@ npx playwright test --headed
 - Login with empty password
 - Login with empty fields
 
+### Dashboard Page
+- Product card displays name, price and image (showcasing loop through all 6 products)
+- Sorting by price in ascending order
+- Add to Cart button updates cart icon counter
+- Add to Cart button changes to Remove after item is added
+- Click on product name redirects to product page
+- Click on Cart icon redirects to Cart page
+
 ## What's Next
 - Dashboard page tests
 - Cart and checkout flows
 - Refactoring: creation of BasePage
+- Refactoring: login fixture to bypass login in beforeEach

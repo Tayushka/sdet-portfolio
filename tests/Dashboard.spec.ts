@@ -1,0 +1,77 @@
+import {test, expect} from "@playwright/test";
+import { LoginPage } from "../pages/LoginPage";
+import { DashboardPage } from "../pages/DashboardPage";
+import { users } from "../fixtures/Users";
+import { dropdownOptions } from "../fixtures/DropdownOptions";
+import { ItemPage } from "../pages/ItemPage";
+
+
+
+test.describe("Dashboard page", () => {
+    
+    let dashboardPage : DashboardPage;
+
+    test.beforeEach(async ( {page} ) => {
+        
+        const loginPage = new LoginPage(page);
+        await loginPage.visit();
+        dashboardPage = await loginPage.logIn(users.standardUser.username, users.standardUser.password);
+
+           
+    });
+
+    test("Product card displays name, price and image", async () => {
+        const count = await dashboardPage.inventoryItem.count();
+
+        for (let i = 0; i < count; i++ ){
+            const product = dashboardPage.inventoryItem.nth(i);
+            await expect.soft(product.locator(dashboardPage.productName)).toBeVisible();
+            await expect.soft(product.locator(dashboardPage.productPrice)).toBeVisible();
+            await expect.soft(product.locator(dashboardPage.productImage)).toBeVisible();
+            
+        };
+
+    });
+
+    test("Sorting by price works correctly", async () => {
+
+        // Suitable for small datasets. For larger datasets, 
+        // representative sampling or API-level verification 
+        // would be more appropriate.
+
+        await dashboardPage.selectSortingOption(dropdownOptions.priceLowToHigh.value);
+        const prices = (await dashboardPage.productPrice.allTextContents()).map(price => Number(price.replace("$", "")));
+        for (let i = 1; i < prices.length; i++){
+            expect(prices[i]).toBeGreaterThanOrEqual(prices[i - 1]);
+            };
+        });
+
+    test("Add to Cart button updates cart icon counter", async () => {
+        await dashboardPage.addFirstItemToCart();
+        await expect(dashboardPage.cartCounter).toHaveText("1");
+    });
+
+    test("Add to Cart button changes to Remove after item is added", async() => {
+        await dashboardPage.addFirstItemToCart();
+        await expect(dashboardPage.addToCart.first()).toHaveText("Remove");
+    });
+
+    test("Click on product redirects to correct product page", async () => {
+        const productPrice = await dashboardPage.productPrice.first().textContent() ?? "";
+        const productName = await dashboardPage.productName.first().textContent() ?? "";
+        const itemPage = await dashboardPage.clickFirstInventoryItem();
+        await expect.soft(itemPage.productPrice).toHaveText(productPrice);
+        await expect(itemPage.productName).toHaveText(productName);
+
+      
+    });
+
+    test("Click on Cart icon redirects to Cart page", async() => {
+        const cartPage = await dashboardPage.clickCartButton();
+        await expect.soft(cartPage.yourCartLink).toBeVisible();
+        await expect(cartPage.checkoutButton).toBeVisible();
+        
+
+    });
+
+});
