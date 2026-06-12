@@ -3,7 +3,6 @@ import { LoginPage } from "../pages/LoginPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { users } from "../fixtures/Users";
 import { dropdownOptions } from "../fixtures/DropdownOptions";
-import { ItemPage } from "../pages/ItemPage";
 
 
 
@@ -46,16 +45,13 @@ test.describe("Dashboard page", () => {
             };
         });
 
-    test("Add to Cart button updates cart icon counter", async () => {
+    test("Add to Cart button updates cart icon counter and changes the button to Remove", async () => {
         await dashboardPage.addFirstItemToCart();
-        await expect(dashboardPage.cartCounter).toHaveText("1");
-    });
-
-    test("Add to Cart button changes to Remove after item is added", async() => {
-        await dashboardPage.addFirstItemToCart();
+        await expect.soft(dashboardPage.cartCounter).toHaveText("1");
         await expect(dashboardPage.addToCart.first()).toHaveText("Remove");
     });
 
+    
     test("Click on product redirects to correct product page", async () => {
         const productPrice = await dashboardPage.productPrice.first().textContent() ?? "";
         const productName = await dashboardPage.productName.first().textContent() ?? "";

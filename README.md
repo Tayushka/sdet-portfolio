@@ -53,8 +53,7 @@ npx playwright test --headed
 ### Dashboard Page
 - Product card displays name, price and image (showcasing loop through all 6 products)
 - Sorting by price in ascending order
-- Add to Cart button updates cart icon counter
-- Add to Cart button changes to Remove after item is added
+- Add to Cart button updates cart icon counter and changes the button to Remove
 - Click on product name redirects to product page
 - Click on Cart icon redirects to Cart page
 
