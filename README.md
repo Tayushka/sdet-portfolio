@@ -59,7 +59,6 @@ npx playwright test --headed
 - Click on Cart icon redirects to Cart page
 
 ## What's Next
-- Dashboard page tests
 - Cart and checkout flows
 - Refactoring: creation of BasePage
 - Refactoring: login fixture to bypass login in beforeEach
