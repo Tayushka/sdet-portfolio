@@ -20,3 +20,16 @@ export const errorMessageText : Record<string, ErrorMessageText> = {
     }
 
 };
+
+export const checkoutErrorMessage : Record<string, ErrorMessageText> = {
+    firstNameError: {
+        message: "Error: First Name is required"
+    },
+
+    lastNameError: {message: "Error: Last Name is required"
+    },
+
+    postalCodeError: {message: "Error: Postal Code is required"
+    }
+
+}

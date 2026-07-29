@@ -15,6 +15,11 @@ a practice e-commerce platform built for automation testing.
 > As the project is small, interfaces and test data are kept together 
 > in `fixtures/`. In a larger project these would be separated into 
 > dedicated `types` and `helpers` folders.
+> 
+> `Checkout.spec.ts` file contains three describe suites, because those tests
+> cover one functionality (checkout) across three pages.
+> On a bigger project, there will be three separate files for each checkout
+> page.
 >
 > `users.ts` contains real app accounts. `credentials.ts` contains 
 > invalid input combinations used for negative testing.
