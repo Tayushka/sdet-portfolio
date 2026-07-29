@@ -3,7 +3,6 @@ import { LoginPage } from "../pages/LoginPage";
 import { DashboardPage } from "../pages/DashboardPage";
 import { CartPage } from "../pages/CartPage";
 import { users } from "../fixtures/Users";
-import { dropdownOptions } from "../fixtures/DropdownOptions";
 import { CheckoutPage } from "../pages/CheckoutPage";
 
 test.describe("Cart page", () => {

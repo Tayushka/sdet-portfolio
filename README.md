@@ -63,6 +63,7 @@ npx playwright test --headed
 - Checkout button redirects to the checkout page
 
 ## What's Next
+- Checkout Page tests
 - E2E checkout flow
 - Refactoring: creation of BasePage
 - Refactoring: login fixture to bypass login in beforeEach
