@@ -57,7 +57,13 @@ npx playwright test --headed
 - Click on product name redirects to product page
 - Click on Cart icon redirects to Cart page
 
+### Cart Page
+- Remove button removes an item from the cart
+- Continue shopping button redirect to the Dashboard without removing the items from the cart
+- Checkout button redirects to the checkout page
+
 ## What's Next
-- Cart and checkout flows
+- E2E checkout flow
 - Refactoring: creation of BasePage
 - Refactoring: login fixture to bypass login in beforeEach
+- Cart setup fixture to bypass UI cart setup
