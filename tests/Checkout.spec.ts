@@ -7,8 +7,9 @@ import { CheckoutPage } from "../pages/CheckoutPage";
 import { checkoutUsers } from "../fixtures/CheckoutUsers";
 import { CheckoutOverviewPage } from "../pages/CheckoutOverviewPage";
 import {checkoutErrorMessage} from "../fixtures/ErrorMessages";
+import { CheckoutCompletePage } from "../pages/CheckoutCompletePage";
 
-test.describe("Checkout page", () => {
+test.describe("Checkout page - Personal Info", () => {
 
     let dashboardPage : DashboardPage;
     let cartPage : CartPage;
@@ -58,3 +59,51 @@ test.describe("Checkout page", () => {
 
 });
 
+test.describe("Checkout page - Overview", () => {
+
+    let dashboardPage : DashboardPage;
+    let cartPage : CartPage;
+    let checkoutPage : CheckoutPage;
+    let checkoutOverviewPage : CheckoutOverviewPage; 
+    let checkoutCompletePage : CheckoutCompletePage;
+
+    test.beforeEach(async ({page}) => {
+        const loginPage = new LoginPage(page);
+        await loginPage.visit();
+        dashboardPage = await loginPage.logIn(users.standardUser.username, users.standardUser.password);
+        await dashboardPage.addFirstItemToCart();
+        cartPage = await dashboardPage.clickCartButton();
+        checkoutPage = await cartPage.clickCheckoutButton();
+        await checkoutPage.fillPersonalInfo(checkoutUsers.firstName, checkoutUsers.lastName, checkoutUsers.postalCode);
+        checkoutOverviewPage = await checkoutPage.clickContinueButton();
+    });
+
+    test("Finish button leads to Checkout Complete page", async () => {
+        checkoutCompletePage = await checkoutOverviewPage.clickFinishButton();
+        await expect.soft(checkoutCompletePage.checkoutCompletePageTitle).toHaveText("Checkout: Complete!");
+        await expect(checkoutCompletePage.checkoutCompleteMessage).toHaveText("Thank you for your order!");
+
+    })
+
+    test("Cancel button leads to the Dashboard without removing items from the cart", async() => {
+        // cartCounter captured from navbar which persists across pages.
+        // Value reflects items added in beforeEach.
+        const cartCounterStart = await dashboardPage.cartCounter.textContent() ?? "";
+        await checkoutOverviewPage.clickCancelButton();
+        await expect(dashboardPage.logoLocator).toBeVisible();
+        await expect(dashboardPage.cartCounter).toHaveText(cartCounterStart);
+
+    });
+
+    test("Total price is calculated correctly", async () => {
+        const subtotal = await checkoutOverviewPage.getSubTotal();
+        const tax = await checkoutOverviewPage.getTax();
+        const total = await checkoutOverviewPage.getTotal();
+        expect(subtotal + tax).toBeCloseTo(total);
+
+    })
+
+})
+
+
+      
