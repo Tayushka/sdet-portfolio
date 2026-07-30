@@ -67,9 +67,22 @@ npx playwright test --headed
 - Continue shopping button redirect to the Dashboard without removing the items from the cart
 - Checkout button redirects to the checkout page
 
+### Checkout Page - Personal Info
+- User proceeds to checkout overview with valid personal info
+- Cancel button redirects to cart page
+- Error message when first name field is empty
+- Error message when last name field is empty
+- Error message when postal code field is empty
+
+### Checkout Page - Overview
+- Finish button redirects to checkout complete page
+- Cancel button redirects to dashboard without clearing cart
+- Total price is correctly calculated as sum of subtotal and tax
+
+### E2E Flow
+- Complete full purchase flow (login → add to cart → checkout → order complete → back to dashboard)
+
 ## What's Next
-- Checkout Page tests
-- E2E checkout flow
 - Refactoring: creation of BasePage
 - Refactoring: login fixture to bypass login in beforeEach
 - Cart setup fixture to bypass UI cart setup
