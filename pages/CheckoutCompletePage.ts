@@ -1,15 +1,16 @@
 import { Page, Locator} from "@playwright/test";
 import { DashboardPage } from "./DashboardPage";
+import { BasePage } from "./BasePage";
 
-export class CheckoutCompletePage {
-    readonly page: Page;
+export class CheckoutCompletePage extends BasePage{
+    
     readonly checkoutCompletePageTitle: Locator;
     readonly checkoutCompleteMessage: Locator;
     readonly backHomeButton: Locator;
     
 
     constructor(page: Page){
-        this.page = page;
+        super(page);
         this.checkoutCompletePageTitle = page.locator('[data-test="title"]');
         this.checkoutCompleteMessage = page.locator('[data-test="complete-header"]')
         this.backHomeButton = page.locator('[data-test="back-to-products"]');

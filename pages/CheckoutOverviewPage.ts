@@ -1,9 +1,10 @@
 import { Page, Locator} from "@playwright/test";
 import { CheckoutCompletePage } from "./CheckoutCompletePage";
 import { DashboardPage } from "./DashboardPage";
+import { BasePage } from "./BasePage";
 
-export class CheckoutOverviewPage {
-    readonly page: Page;
+export class CheckoutOverviewPage extends BasePage {
+    
     readonly checkoutOverviewPageTitle: Locator;
     readonly finishButton: Locator;
     readonly cancelButton: Locator;
@@ -13,7 +14,7 @@ export class CheckoutOverviewPage {
     
 
     constructor(page: Page){
-        this.page = page;
+        super(page);
         this.checkoutOverviewPageTitle = page.locator('[data-test="title"]');
         this.finishButton = page.locator('[data-test="finish"]');
         this.cancelButton = page.locator('[data-test="cancel"]');

@@ -64,7 +64,7 @@ test.describe("Dashboard page", () => {
 
     test("Click on Cart icon redirects to Cart page", async() => {
         const cartPage = await dashboardPage.clickCartButton();
-        await expect.soft(cartPage.yourCartLink).toBeVisible();
+        await expect.soft(cartPage.yourCartTitle).toBeVisible();
         await expect(cartPage.checkoutButton).toBeVisible();
         
 

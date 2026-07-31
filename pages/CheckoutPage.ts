@@ -1,9 +1,10 @@
 import { Page, Locator} from "@playwright/test";
 import { CartPage } from "./CartPage";
 import { CheckoutOverviewPage } from "./CheckoutOverviewPage";
+import { BasePage } from "./BasePage";
 
-export class CheckoutPage {
-    readonly page: Page;
+export class CheckoutPage extends BasePage {
+    
     readonly checkoutTitle: Locator;
     readonly firstName : Locator;
     readonly lastName : Locator;
@@ -14,7 +15,7 @@ export class CheckoutPage {
 
 
     constructor(page: Page){
-        this.page = page;
+        super(page);
         this.checkoutTitle = page.locator('[data-test="title"]');
         this.firstName = page.locator('[data-test="firstName"]');
         this.lastName = page.locator('[data-test="lastName"]');

@@ -1,30 +1,26 @@
 import { Page, Locator } from "@playwright/test";
 import { ItemPage } from "./ItemPage";
 import { CartPage } from "./CartPage";
+import { BasePage } from "./BasePage";
 
-export class DashboardPage {
-    readonly page: Page;
-    readonly logoLocator: Locator;
+export class DashboardPage extends BasePage {
+    
     readonly inventoryItem: Locator;
     readonly productName: Locator;
     readonly productPrice: Locator;
     readonly productImage: Locator;
     readonly sortingDropdown: Locator;
-    readonly cartCounter: Locator;
-    readonly cartButton: Locator;
     readonly addToCart: Locator;
 
 
     constructor(page: Page) {
-        this.page = page;
-        this.logoLocator = page.locator(".app_logo");
+        super(page);
+        
         this.inventoryItem = page.locator('[data-test="inventory-item"]');
         this.productName = page.locator('[data-test="inventory-item-name"]');
         this.productPrice = page.locator('[data-test="inventory-item-price"]');
         this.productImage = page.locator('a .inventory_item_img');
         this.sortingDropdown = page.locator('[data-test="product-sort-container"]');
-        this.cartCounter = page.locator('[data-test="shopping-cart-badge"]');
-        this.cartButton = page.locator('[data-test="shopping-cart-link"]');
         this.addToCart = page.locator('.btn_small.btn_inventory');
     }
 

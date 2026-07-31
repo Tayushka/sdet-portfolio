@@ -26,6 +26,9 @@ a practice e-commerce platform built for automation testing.
 > 
 > In order to showcase test data files, user credentials are made public.
 > Obviously, on a real project the solution is different.
+>
+> There are no separate `Header.ts`/`Footer.ts` files because for the project of this size
+> it's more rational to create a direct BasePage.
 
 ## How to Run
 
@@ -83,6 +86,5 @@ npx playwright test --headed
 - Complete full purchase flow (login → add to cart → checkout → order complete → back to dashboard)
 
 ## What's Next
-- Refactoring: creation of BasePage
 - Refactoring: login fixture to bypass login in beforeEach
 - Cart setup fixture to bypass UI cart setup

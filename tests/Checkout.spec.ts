@@ -33,7 +33,7 @@ test.describe("Checkout page - Personal Info", () => {
 
     test("Cancel button redirects to the cart page", async() => {
         await checkoutPage.clickCancelButton();
-        await expect(cartPage.yourCartLink).toHaveText("Your Cart");
+        await expect(cartPage.yourCartTitle).toHaveText("Your Cart");
     });
 
     test("Error message for the First Name field", async() => {
@@ -86,9 +86,7 @@ test.describe("Checkout page - Overview", () => {
     })
 
     test("Cancel button leads to the Dashboard without removing items from the cart", async() => {
-        // cartCounter captured from navbar which persists across pages.
-        // Value reflects items added in beforeEach.
-        const cartCounterStart = await dashboardPage.cartCounter.textContent() ?? "";
+        const cartCounterStart = await checkoutOverviewPage.cartCounter.textContent() ?? "";
         await checkoutOverviewPage.clickCancelButton();
         await expect(dashboardPage.logoLocator).toBeVisible();
         await expect(dashboardPage.cartCounter).toHaveText(cartCounterStart);

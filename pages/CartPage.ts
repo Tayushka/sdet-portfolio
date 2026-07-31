@@ -1,17 +1,17 @@
 import { Page, Locator} from "@playwright/test";
 import { DashboardPage } from "./DashboardPage";
 import { CheckoutPage } from "./CheckoutPage";
+import { BasePage } from "./BasePage";
 
-export class CartPage {
-    readonly page: Page;
-    readonly yourCartLink : Locator;
+export class CartPage extends BasePage {
+    readonly yourCartTitle : Locator;
     readonly checkoutButton : Locator;
     readonly removeButton : Locator;
     readonly continueShoppingButton: Locator;
 
     constructor(page: Page){
-        this.page = page;
-        this.yourCartLink = page.locator('[data-test="title"]');
+        super(page);
+        this.yourCartTitle = page.locator('[data-test="title"]');
         this.checkoutButton = page.locator('[data-test="checkout"]');
         this.removeButton = page.locator('.btn.btn_secondary.btn_small.cart_button');
         this.continueShoppingButton = page.locator('[data-test="continue-shopping"]')
