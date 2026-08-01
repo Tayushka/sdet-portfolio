@@ -1,25 +1,20 @@
-import {test, expect} from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
-import { DashboardPage } from "../pages/DashboardPage";
+import { test, expect} from "../fixtures";
 import { CartPage } from "../pages/CartPage";
-import { users } from "../fixtures/Users";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { checkoutUsers } from "../fixtures/CheckoutUsers";
 import { CheckoutOverviewPage } from "../pages/CheckoutOverviewPage";
-import {checkoutErrorMessage} from "../fixtures/ErrorMessages";
+import { checkoutErrorMessage } from "../fixtures/ErrorMessages";
 import { CheckoutCompletePage } from "../pages/CheckoutCompletePage";
 
 test.describe("Checkout page - Personal Info", () => {
 
-    let dashboardPage : DashboardPage;
+
     let cartPage : CartPage;
     let checkoutPage : CheckoutPage;
     let checkoutOverviewPage : CheckoutOverviewPage; 
 
-    test.beforeEach(async ({page}) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.visit();
-        dashboardPage = await loginPage.logIn(users.standardUser.username, users.standardUser.password);
+    test.beforeEach(async ({dashboardPage}) => {
+
         await dashboardPage.addFirstItemToCart();
         cartPage = await dashboardPage.clickCartButton();
         checkoutPage = await cartPage.clickCheckoutButton();    
@@ -61,16 +56,13 @@ test.describe("Checkout page - Personal Info", () => {
 
 test.describe("Checkout page - Overview", () => {
 
-    let dashboardPage : DashboardPage;
     let cartPage : CartPage;
     let checkoutPage : CheckoutPage;
     let checkoutOverviewPage : CheckoutOverviewPage; 
     let checkoutCompletePage : CheckoutCompletePage;
 
-    test.beforeEach(async ({page}) => {
-        const loginPage = new LoginPage(page);
-        await loginPage.visit();
-        dashboardPage = await loginPage.logIn(users.standardUser.username, users.standardUser.password);
+    test.beforeEach(async ({dashboardPage}) => {
+
         await dashboardPage.addFirstItemToCart();
         cartPage = await dashboardPage.clickCartButton();
         checkoutPage = await cartPage.clickCheckoutButton();
@@ -85,7 +77,7 @@ test.describe("Checkout page - Overview", () => {
 
     })
 
-    test("Cancel button leads to the Dashboard without removing items from the cart", async() => {
+    test("Cancel button leads to the Dashboard without removing items from the cart", async({dashboardPage}) => {
         const cartCounterStart = await checkoutOverviewPage.cartCounter.textContent() ?? "";
         await checkoutOverviewPage.clickCancelButton();
         await expect(dashboardPage.logoLocator).toBeVisible();

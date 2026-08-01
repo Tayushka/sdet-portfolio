@@ -1,21 +1,14 @@
-import {test, expect} from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
-import { DashboardPage } from "../pages/DashboardPage";
+import {test, expect} from "../fixtures";
 import { CartPage } from "../pages/CartPage";
-import { users } from "../fixtures/Users";
 import { CheckoutPage } from "../pages/CheckoutPage";
 
 test.describe("Cart page", () => {
 
-    let dashboardPage : DashboardPage;
     let cartPage : CartPage;
     let checkoutPage : CheckoutPage;
 
-    test.beforeEach(async({page}) => {
+    test.beforeEach(async({dashboardPage}) => {
 
-        const loginPage = new LoginPage(page);
-        await loginPage.visit();
-        dashboardPage = await loginPage.logIn(users.standardUser.username, users.standardUser.password);
         await dashboardPage.addFirstItemToCart();
         cartPage = await dashboardPage.clickCartButton();
 
@@ -26,7 +19,7 @@ test.describe("Cart page", () => {
         await expect(cartPage.removeButton).not.toBeVisible();
     });
 
-    test("Continue shopping button works correctly", async() => {
+    test("Continue shopping button works correctly", async({dashboardPage}) => {
         const cartCounterStart = await dashboardPage.cartCounter.textContent() ?? "";
         await cartPage.clickContinueShoppingButton();
         await expect(dashboardPage.cartCounter).toHaveText(cartCounterStart);

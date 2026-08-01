@@ -1,23 +1,16 @@
-import {test, expect} from "@playwright/test";
-import { LoginPage } from "../pages/LoginPage";
+import {test, expect} from "../fixtures";
 import { DashboardPage } from "../pages/DashboardPage";
-import { users } from "../fixtures/Users";
 import { dropdownOptions } from "../fixtures/DropdownOptions";
 
 
 
 test.describe("Dashboard page", () => {
     
-    let dashboardPage : DashboardPage;
+    let dashboardPage: DashboardPage
 
-    test.beforeEach(async ( {page} ) => {
-        
-        const loginPage = new LoginPage(page);
-        await loginPage.visit();
-        dashboardPage = await loginPage.logIn(users.standardUser.username, users.standardUser.password);
-
-           
-    });
+test.beforeEach(async ({ dashboardPage: fixture }) => {
+    dashboardPage = fixture
+})
 
     test("Product card displays name, price and image", async () => {
         const count = await dashboardPage.inventoryItem.count();

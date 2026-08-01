@@ -10,7 +10,7 @@ a practice e-commerce platform built for automation testing.
 ## Project Structure
 - `pages/` — Page Object Model classes
 - `tests/` — Test specs
-- `fixtures/` — Test data and interfaces
+- `fixtures/` — Test data, interfaces and custom Playwright fixtures
 
 > As the project is small, interfaces and test data are kept together 
 > in `fixtures/`. In a larger project these would be separated into 
@@ -29,6 +29,11 @@ a practice e-commerce platform built for automation testing.
 >
 > There are no separate `Header.ts`/`Footer.ts` files because for the project of this size
 > it's more rational to create a direct BasePage.
+>
+> A custom login fixture (`fixtures/index.ts`) is used to bypass UI login
+> in beforeEach hooks for post-login page tests, improving test setup 
+> efficiency. Login tests and E2E tests intentionally bypass this fixture
+> as login is part of their test scope.
 
 ## How to Run
 
@@ -86,5 +91,4 @@ npx playwright test --headed
 - Complete full purchase flow (login → add to cart → checkout → order complete → back to dashboard)
 
 ## What's Next
-- Refactoring: login fixture to bypass login in beforeEach
 - Cart setup fixture to bypass UI cart setup
