@@ -13,10 +13,9 @@ test.describe("Checkout page - Personal Info", () => {
     let checkoutPage : CheckoutPage;
     let checkoutOverviewPage : CheckoutOverviewPage; 
 
-    test.beforeEach(async ({dashboardPage}) => {
+    test.beforeEach(async ({cartPage : fixture}) => {
 
-        await dashboardPage.addFirstItemToCart();
-        cartPage = await dashboardPage.clickCartButton();
+        cartPage = fixture;
         checkoutPage = await cartPage.clickCheckoutButton();    
     });
 
@@ -61,10 +60,9 @@ test.describe("Checkout page - Overview", () => {
     let checkoutOverviewPage : CheckoutOverviewPage; 
     let checkoutCompletePage : CheckoutCompletePage;
 
-    test.beforeEach(async ({dashboardPage}) => {
-
-        await dashboardPage.addFirstItemToCart();
-        cartPage = await dashboardPage.clickCartButton();
+    test.beforeEach(async ({cartPage : fixture}) => {
+       
+        cartPage = fixture;
         checkoutPage = await cartPage.clickCheckoutButton();
         await checkoutPage.fillPersonalInfo(checkoutUsers.firstName, checkoutUsers.lastName, checkoutUsers.postalCode);
         checkoutOverviewPage = await checkoutPage.clickContinueButton();

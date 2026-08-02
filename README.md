@@ -92,3 +92,4 @@ npx playwright test --headed
 
 ## What's Next
 - Cart setup fixture to bypass UI cart setup
+- Replace login fixture with storageState for faster test execution
