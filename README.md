@@ -91,5 +91,4 @@ npx playwright test --headed
 - Complete full purchase flow (login → add to cart → checkout → order complete → back to dashboard)
 
 ## What's Next
-- Cart setup fixture to bypass UI cart setup
 - Replace login fixture with storageState for faster test execution
